@@ -21,13 +21,13 @@
                     <div class="col-12 col-md-12 col-lg-5">
                         <div class="card profile-widget">
                             <div class="profile-widget-header">
-                                <img alt="image" src="{{asset('backend/assets/img/avatar/avatar-1.png')}}" class="rounded-circle profile-widget-picture">
+                                <img alt="image" src="{{asset(Auth::user()->image)}}" class="rounded-circle profile-widget-picture">
                             </div>
                         </div>
                     </div>
                     <div class="col-12 col-md-12 col-lg-7">
                         <div class="card">
-                            <form method="post"  class="needs-validation" novalidate="" action="{{route('admin.profile.update')}}">
+                            <form method="post"  class="needs-validation" novalidate="" action="{{route('admin.profile.update')}}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="card-header">
                                     <h4>Edit Profile</h4>
@@ -49,6 +49,12 @@
                                             <div class="invalid-feedback">
                                                 Please fill in the email
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-12">
+                                            <label>Profile Image</label>
+                                            <input type="file" name="image" class="form-control" required="">
                                         </div>
                                     </div>
                                 </div>
