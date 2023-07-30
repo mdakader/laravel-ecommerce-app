@@ -13,3 +13,4 @@ Route::get('dashboard', [AdminController::class, 'dashboard'])->middleware(['aut
 /** Profile Routes*/
 Route::get('profile', [ProfileController::class, 'index'])->name('profile');
 Route::post('profile/update', [ProfileController::class, 'updateProfile'])->name('admin.profile.update');
+Route::post('profile/update/password', [ProfileController::class, 'updatePassword'])->name('admin.password.update');
