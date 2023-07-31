@@ -10,12 +10,14 @@
                         <div class="wsus__dashboard_profile">
                             <div class="wsus__dash_pro_area">
                                 <h4>basic information</h4>
-                                <form>
+                                <form action="{{route('user.profile.update')}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    @method('PUT')
                                     <div class="row mb-5">
                                         <div class="col-xl-4 col-sm-4 col-md-4">
                                             <div class="wsus__dash_pro_img">
-                                                <img src="{{asset('frontend/images/ts-2.jpg')}}" alt="img" class="img-fluid w-100">
-                                                <input type="file">
+                                                <img src="{{Auth::user()->image ? asset(Auth::user()->image) : asset('frontend/images/ts-2.jpg')}}" alt="img" class="img-fluid w-100">
+                                                <input type="file" name="image">
                                             </div>
                                         </div>
                                     </div>
@@ -25,13 +27,13 @@
                                                 <div class="col-xl-12 col-md-12">
                                                     <div class="wsus__dash_pro_single">
                                                         <i class="fas fa-user-tie"></i>
-                                                        <input type="text" placeholder="Name">
+                                                        <input type="text" placeholder="Name" name="name" value="{{Auth::user()->name}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-12 col-md-12">
                                                     <div class="wsus__dash_pro_single">
                                                         <i class="fal fa-envelope-open"></i>
-                                                        <input type="email" placeholder="Email">
+                                                        <input type="email" placeholder="Email" name="email" value="{{Auth::user()->email}}">
                                                     </div>
                                                 </div>
 
@@ -67,7 +69,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
                                 </form>
                             </div>
                         </div>
