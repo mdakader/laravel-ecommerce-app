@@ -97,7 +97,7 @@ class SliderController extends Controller
         $slider = Slider::findOrFail($id);
 
         /** Handle file upload */
-        $imagePath = $this->uploadImage($request, 'banner', 'uploads', $slider->banner);
+        $imagePath = $this->updateImage($request, 'banner', 'uploads', $slider->banner);
 
         $slider->banner =  empty(!$imagePath) ? $imagePath : $slider->banner;
         $slider->type = $request->type;
@@ -119,6 +119,10 @@ class SliderController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $slider = Slider::findOrFail($id);
+        $this->deleteImage($slider->banner);
+        $slider->delete();
+
+        return response(['status' => 'success', 'message' => 'Deleted Successfully!']);
     }
 }
