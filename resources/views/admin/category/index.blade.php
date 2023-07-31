@@ -13,7 +13,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h4>Category Table</h4>
+                            <h4>All Categories</h4>
                             <div class="card-header-action">
                                 <a href="{{route('admin.category.create')}}" class="btn btn-primary"><i class="fas fa-plus"></i> Create New</a>
                             </div>
@@ -33,4 +33,29 @@
 
 @push('scripts')
     {{ $dataTable->scripts(attributes: ['type' => 'module']) }}
+
+    <script>
+        $(document).ready(function(){
+            $('body').on('click', '.change-status', function(){
+                let isChecked = $(this).is(':checked');
+                let id = $(this).data('id');
+
+                $.ajax({
+                    url: "{{route('admin.category.change-status')}}",
+                    method: 'PUT',
+                    data: {
+                        status: isChecked,
+                        id: id
+                    },
+                    success: function(data){
+                        toastr.success(data.message)
+                    },
+                    error: function(xhr, status, error){
+                        console.log(error);
+                    }
+                })
+
+            })
+        })
+    </script>
 @endpush
