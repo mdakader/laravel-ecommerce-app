@@ -52,7 +52,10 @@
 
 
         <!-- Main Content -->
-        @yield('content')
+        <!-- Main Content -->
+        <div class="main-content">
+            @yield('content')
+        </div>
         <footer class="main-footer">
             <div class="footer-left">
                 Copyright &copy; 2018

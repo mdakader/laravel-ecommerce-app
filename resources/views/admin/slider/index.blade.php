@@ -1,28 +1,27 @@
 @extends('admin.layouts.master')
 
 @section('content')
-    <div class="main-content">
-        <section class="section">
-            <div class="section-header">
-                <h1>Table</h1>
-                <div class="section-header-breadcrumb">
-                    <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
-                    <div class="breadcrumb-item"><a href="#">Components</a></div>
-                    <div class="breadcrumb-item">Table</div>
-                </div>
+    <section class="section">
+        <div class="section-header">
+            <h1>Table</h1>
+            <div class="section-header-breadcrumb">
+                <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
+                <div class="breadcrumb-item"><a href="#">Components</a></div>
+                <div class="breadcrumb-item">Table</div>
             </div>
+        </div>
 
-            <div class="section-body">
-                <a href="{{route('admin.slider.create')}}" class="btn btn-primary">Create New</a>
-                <div class="row">
-                    <div class="col-12 col-md-12 col-lg-12">
-                        <div class="card-body">
-                            <div class="card">
-                                <div class="card-header">
+        <div class="section-body">
+            <a href="{{route('admin.slider.create')}}" class="btn btn-primary">Create New</a>
+            <div class="row">
+                <div class="col-12 col-md-12 col-lg-12">
+                    <div class="card-body">
+                        <div class="card">
+                            <div class="card-header">
                                 <div class="card-header-action">
                                     <a href="{{route('admin.slider.create')}}" class="btn btn-primary">Create New</a>
                                 </div>
-                                </div>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table table-bordered table-md">
                                     <tr>
@@ -95,8 +94,8 @@
                         </div>
                     </div>
                 </div>
-                </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+
 @endsection
