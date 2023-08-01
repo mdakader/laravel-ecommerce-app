@@ -17,19 +17,24 @@
                             <h4>Create Brand</h4>
                         </div>
                         <div class="card-body">
-                            <form action="{{route('admin.category.store')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('admin.brand.store')}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
-                                    <label>Icon</label>
-                                    <div>
-                                        <button class="btn btn-primary" data-icon="" data-selected-class="btn-danger"
-                                                data-unselected-class="btn-info" role="iconpicker" name="icon"></button>
-                                    </div>
-
+                                    <label>Logo</label>
+                                    <input type="file" class="form-control" name="logo">
                                 </div>
+
                                 <div class="form-group">
                                     <label>Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{old('name')}}">
+                                    <input type="text" class="form-control" name="name" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputState">Is Featured</label>
+                                    <select id="inputState" class="form-control" name="is_featured">
+                                        <option value="">Select</option>
+                                        <option value="1">Yes</option>
+                                        <option value="0">No</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label for="inputState">Status</label>
