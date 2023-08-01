@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('category_id');
             $table->string('name');
             $table->string('slug');
-            $table->string('icon');
             $table->boolean('status');
             $table->timestamps();
         });
