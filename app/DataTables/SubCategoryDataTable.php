@@ -28,8 +28,8 @@ class SubCategoryDataTable extends DataTable
 
                 return $editBtn.$deleteBtn;
             })
-            ->addColumn('category', function ($query){
-              return $query->category->name;
+            ->addColumn('category', function($query){
+                return $query->category->name;
             })
             ->addColumn('status', function($query){
                 if($query->status == 1){
@@ -45,7 +45,7 @@ class SubCategoryDataTable extends DataTable
                 }
                 return $button;
             })
-            ->rawColumns(['action', 'status'])
+            ->rawColumns(['status', 'action'])
             ->setRowId('id');
     }
 
@@ -63,20 +63,20 @@ class SubCategoryDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-                    ->setTableId('subcategory-table')
-                    ->columns($this->getColumns())
-                    ->minifiedAjax()
-                    //->dom('Bfrtip')
-                    ->orderBy(0)
-                    ->selectStyleSingle()
-                    ->buttons([
-                        Button::make('excel'),
-                        Button::make('csv'),
-                        Button::make('pdf'),
-                        Button::make('print'),
-                        Button::make('reset'),
-                        Button::make('reload')
-                    ]);
+            ->setTableId('subcategory-table')
+            ->columns($this->getColumns())
+            ->minifiedAjax()
+            //->dom('Bfrtip')
+            ->orderBy(0)
+            ->selectStyleSingle()
+            ->buttons([
+                Button::make('excel'),
+                Button::make('csv'),
+                Button::make('pdf'),
+                Button::make('print'),
+                Button::make('reset'),
+                Button::make('reload')
+            ]);
     }
 
     /**
@@ -91,10 +91,10 @@ class SubCategoryDataTable extends DataTable
             Column::make('category'),
             Column::make('status'),
             Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(200)
-                  ->addClass('text-center'),
+                ->exportable(false)
+                ->printable(false)
+                ->width(200)
+                ->addClass('text-center'),
 
         ];
     }
