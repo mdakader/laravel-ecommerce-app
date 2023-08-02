@@ -42,5 +42,5 @@ Route::resource('child-category', ChildCategoryController::class);
 Route::put('brand/change-status', [BrandController::class, 'changeStatus'])->name('brand.change-status');
 Route::resource('brand', BrandController::class);
 
-/** Vendor Profile Routes*/
-Route::resource('vendor/profile', AdminVendorProfileController::class);
+/** Vendor Profile routes */
+Route::resource('vendor-profile', AdminVendorProfileController::class);
