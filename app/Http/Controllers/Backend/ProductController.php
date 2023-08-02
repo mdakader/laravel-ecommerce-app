@@ -7,13 +7,16 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
+use App\Models\Order;
+use App\Models\OrderProduct;
 use App\Models\Product;
+use App\Models\ProductImageGallery;
+use App\Models\ProductVariant;
 use App\Models\SubCategory;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Str;
-
 
 class ProductController extends Controller
 {
@@ -35,7 +38,6 @@ class ProductController extends Controller
         $brands = Brand::all();
         return view('admin.product.create', compact('categories', 'brands'));
     }
-
 
     /**
      * Store a newly created resource in storage.
@@ -103,7 +105,12 @@ class ProductController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $product = Product::findOrFail($id);
+        $subCategories = SubCategory::where('category_id', $product->category_id)->get();
+        $childCategories = ChildCategory::where('sub_category_id', $product->sub_category_id)->get();
+        $categories = Category::all();
+        $brands = Brand::all();
+        return view('admin.product.edit', compact('product', 'categories', 'brands', 'subCategories', 'childCategories'));
     }
 
     /**
@@ -111,7 +118,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
     }
 
     /**
@@ -119,14 +126,9 @@ class ProductController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
     }
 
-
-
-    /**
-     * Change status
-     */
     public function changeStatus(Request $request)
     {
         $product = Product::findOrFail($request->id);
@@ -135,7 +137,6 @@ class ProductController extends Controller
 
         return response(['message' => 'Status has been updated!']);
     }
-
 
     /**
      * Get all product sub categores
@@ -154,4 +155,5 @@ class ProductController extends Controller
 
         return $childCategories;
     }
+
 }
