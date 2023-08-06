@@ -7,11 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
-use App\Models\Order;
-use App\Models\OrderProduct;
 use App\Models\Product;
-use App\Models\ProductImageGallery;
-use App\Models\ProductVariant;
 use App\Models\SubCategory;
 use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
@@ -44,6 +40,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+//        dd($request->all());
+//        dd(Auth::user()->vendor);
         $request->validate([
             'image' => ['required', 'image', 'max:3000'],
             'name' => ['required', 'max:200'],
@@ -65,7 +63,7 @@ class ProductController extends Controller
         $product->thumb_image = $imagePath;
         $product->name = $request->name;
         $product->slug = Str::slug($request->name);
-        $product->vendor_id = Auth::user()->id;
+        $product->vendor_id = Auth::user()->vendor->id;
         $product->category_id = $request->category;
         $product->sub_category_id = $request->sub_category;
         $product->child_category_id = $request->child_category;
