@@ -55,6 +55,6 @@ Route::get('product/get-child-categories', [ProductController::class, 'getChildC
 Route::put('product/change-status', [ProductController::class, 'changeStatus'])->name('product.change-status');
 Route::resource('products', ProductController::class);
 
-
 /** Products image gallery route */
+Route::get('products-image-gallery/{id}', [ProductImageGalleryController::class, 'showTable'])->name('products-image-gallery.showTable');
 Route::resource('products-image-gallery', ProductImageGalleryController::class);

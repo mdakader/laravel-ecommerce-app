@@ -15,11 +15,12 @@ class ProductImageGalleryController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(ProductImageGalleryDataTable $dataTable)
+    public function showTable($id, ProductImageGalleryDataTable $dataTable)
     {
-//        $product = Product::findOrFail($request->product);
-        return $dataTable->render('admin.product.image-gallery.index');
-//        return $dataTable->with($request->all())->render('admin.product.image-gallery.index', compact('product'));
+
+        $product = Product::find($id);
+//        dd($product);
+        return $dataTable->with('productId', $id)->render('admin.product.image-gallery.index', compact('product'));
     }
 
     /**
@@ -59,7 +60,7 @@ class ProductImageGalleryController extends Controller
      */
     public function show(string $id)
     {
-
+        //
     }
 
     /**
