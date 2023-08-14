@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\AdminVendorProfileController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\ProductImageGalleryController;
+use App\Http\Controllers\Backend\ProductVariantController;
 
 
 
@@ -58,3 +59,12 @@ Route::resource('products', ProductController::class);
 /** Products image gallery route */
 Route::get('products-image-gallery/{id}', [ProductImageGalleryController::class, 'showTable'])->name('products-image-gallery.showTable');
 Route::resource('products-image-gallery', ProductImageGalleryController::class);
+
+/** Products variant route */
+Route::get('products-variant/{productId}', [ProductVariantController::class, 'index'])->name('products-variant.index');
+Route::get('products-variant/create/{productId}', [ProductVariantController::class, 'create'])->name('products-variant.create');
+Route::post('products-variant', [ProductVariantController::class, 'store'])->name('products-variant.store');
+Route::get('products-variant-edit/{variantId}', [ProductVariantController::class, 'edit'])->name('products-variant.edit');
+Route::put('products-variant-update/{variantId}', [ProductVariantController::class, 'update'])->name('products-variant.update');
+Route::delete('products-variant/{variantId}', [ProductVariantController::class, 'destroy'])->name('products-variant.destroy');
+Route::put('products-variant/change-status', [ProductVariantController::class, 'changeStatus'])->name('products-variant.change-status');
