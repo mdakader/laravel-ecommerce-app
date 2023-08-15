@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\VendorController;
 use App\Http\Controllers\Backend\VendorProfileController;
 use App\Http\Controllers\Backend\VendorShopProfileController;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Backend\VendorProductImageGalleryController;
 
 /** Vendor Routes */
 Route::get('dashboard', [VendorController::class, 'dashboard'])->name('dashboard');
@@ -21,3 +22,8 @@ Route::get('product/get-subcategories', [VendorProductController::class, 'getSub
 Route::get('product/get-child-categories', [VendorProductController::class, 'getChildCategories'])->name('product.get-child-categories');
 Route::put('product/change-status', [VendorProductController::class, 'changeStatus'])->name('product.change-status');
 Route::resource('products', VendorProductController::class);
+
+/** Products image gallery route */
+Route::get('products-image-gallery/{productId}', [VendorProductImageGalleryController::class, 'index'])->name('products-image-gallery.index');
+Route::post('products-image-gallery', [VendorProductImageGalleryController::class, 'store'])->name('products-image-gallery.store');
+Route::delete('products-image-gallery/{productId}', [VendorProductImageGalleryController::class, 'destroy'])->name('products-image-gallery.destroy');
