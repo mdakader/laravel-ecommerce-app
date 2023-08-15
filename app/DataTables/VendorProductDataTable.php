@@ -27,14 +27,14 @@ class VendorProductDataTable extends DataTable
                 $editBtn = "<a href='".route('vendor.products.edit', $query->id)."' class='btn btn-primary'><i class='far fa-edit'></i></a>";
                 $deleteBtn = "<a href='".route('vendor.products.destroy', $query->id)."' class='btn btn-danger delete-item' ><i class='far fa-trash-alt'></i></a>";
 
-                $moreBtn = '<div class="btn-group dropstart" style="margin-left:3px">
+                $moreBtn = '<div class="btn-group dropstart d-inline" style="margin-left:3px;">
                 <button type="button" class="btn btn-secondary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fas fa-cog"></i>
                 </button>
-                <ul class="dropdown-menu">
-                    <li><a class="dropdown-item has-icon" href="'.route('vendor.products-image-gallery.index', ['productId' => $query->id]).'"> Image Gallery</a></li>
-                    <li><a class="dropdown-item has-icon" href=""> Variants</a></li>
-                </ul>
+                <div class="dropdown-menu" x-placement="bottom-start" style="position: absolute; transform: translate3d(0px, 28px, 0px); top: 0px; left: 0px; will-change: transform;">
+                  <a class="dropdown-item has-icon" href="'.route('vendor.products-image-gallery.index', ['productId' => $query->id]).'"><i class="far fa-heart"></i> Image Gallery</a>
+                  <a class="dropdown-item has-icon" href="'.route('vendor.products-variant.index', ['productId' => request()->product, $query->id]).'"><i class="far fa-file"></i> Variants</a>
+                </div>
             </div>';
 
                 return $editBtn.$deleteBtn.$moreBtn;
