@@ -2,8 +2,11 @@
 
 namespace App\Providers;
 
+use App\Models\GeneralSetting;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +23,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        /** Use bootstrap paginator */
         Paginator::useBootstrap();
+
+        $generalSetting = GeneralSetting::first();
+
+        /** set time zone */
+        Config::set('app.timezone', $generalSetting->time_zone);
+
+        /** Share variable at all view */
+        View::composer('*', function($view) use ($generalSetting){
+            $view->with(['settings' => $generalSetting]);
+        });
     }
 }
