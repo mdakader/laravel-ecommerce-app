@@ -398,59 +398,7 @@
                                     <div class="row">
                                         <div class="col-xl-12">
                                             <div class="wsus__description_area">
-                                                <h1>Heading</h1>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum
-                                                    sapiente aliquam ut neque voluptatibus inventore odit nesciunt.
-                                                    Nobis quas saepe repellat repudiandae qui sint? Delectus dignissimos
-                                                    maiores fuga doloremque magni, ratione provident exercitationem
-                                                    aliquam tempore velit facere autem magnam, architecto inventore
-                                                    recusandae dolorum, illo sequi officiis dolore! Unde enim,
-                                                    exercitationem. Lorem ipsum</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum
-                                                    sapiente aliquam ut neque voluptatibus inventore odit nesciunt.
-                                                    Nobis quas saepe repellat repudiandae qui sint? Delectus dignissimos
-                                                    maiores fuga doloremque magni, ratione provident exercitationem
-                                                    aliquam tempore velit facere autem magnam, architecto inventore
-                                                    recusandae dolorum, illo sequi officiis dolore! Unde enim,
-                                                    exercitationem. Lorem ipsum</p>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum
-                                                    sapiente aliquam ut neque voluptatibus inventore odit nesciunt.
-                                                    Nobis quas saepe repellat repudiandae qui sint? Delectus dignissimos
-                                                    maiores fuga doloremque magni, ratione provident exercitationem
-                                                    aliquam tempore velit facere autem magnam, architecto inventore
-                                                    recusandae dolorum, illo sequi officiis dolore! Unde enim,
-                                                    exercitationem. Lorem ipsum</p>
-                                                <ul>
-                                                    <li>Consectetur adipisicing elit. Voluptatum sapiente aliquam ut
-                                                        neque voluptatibus inventore odit nesciunt. Nobis quas saepe
-                                                        repellat</li>
-                                                    <li>Delectus dignissimos maiores fuga doloremque magni, ratione
-                                                        provident exercitationem aliquam tempore velit facere autem
-                                                        magnam</li>
-                                                    <li>velit facere autem magnam, architecto inventore recusandae
-                                                        dolorum, illo sequi officiis dolore! Unde enim</li>
-                                                    <li>Repudiandae qui sint? Delectus dignissimos maiores fuga
-                                                        doloremque magni, ratione provident exercitationem aliquam
-                                                        tempore velit facere autem</li>
-                                                    <li>Ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum
-                                                        sapiente aliquam ut neque voluptatibus inventore odit nesciunt.
-                                                        Nobis quas saepe repella</li>
-                                                </ul>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum
-                                                    sapiente aliquam ut neque voluptatibus inventore odit nesciunt.
-                                                    Nobis quas saepe repellat repudiandae qui sint? Delectus dignissimos
-                                                    maiores fuga doloremque magni, ratione provident exercitationem
-                                                    aliquam tempore velit facere autem magnam, architecto inventore
-                                                    recusandae dolorum, illo sequi officiis dolore! Unde enim,
-                                                    exercitationem. Lorem ipsum</p>
-                                                <h4>Heading 5</h4>
-                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum
-                                                    sapiente aliquam ut neque voluptatibus inventore odit nesciunt.
-                                                    Nobis quas saepe repellat repudiandae qui sint? Delectus dignissimos
-                                                    maiores fuga doloremque magni, ratione provident exercitationem
-                                                    aliquam tempore velit facere autem magnam, architecto inventore
-                                                    recusandae dolorum, illo sequi officiis dolore! Unde enim,
-                                                    exercitationem. Lorem ipsum</p>
+                                                {!!$product->long_description!!}
                                             </div>
                                         </div>
                                         <div class="row">
@@ -516,12 +464,12 @@
                                         <div class="row">
                                             <div class="col-xl-6 col-xxl-5 col-md-6">
                                                 <div class="wsus__vebdor_img">
-                                                    <img src="{{asset('frontend/images/slider_1.jpg')}}" alt="vensor" class="img-fluid w-100">
+                                                    <img src="{{asset($product->vendor->banner)}}" alt="vensor" class="img-fluid w-100">
                                                 </div>
                                             </div>
                                             <div class="col-xl-6 col-xxl-7 col-md-6 mt-4 mt-md-0">
                                                 <div class="wsus__pro_det_vendor_text">
-                                                    <h4>jhon deo</h4>
+                                                    <h4>{{$product->vendor->user->name}}</h4>
                                                     <p class="rating">
                                                         <i class="fas fa-star"></i>
                                                         <i class="fas fa-star"></i>
@@ -530,41 +478,16 @@
                                                         <i class="fas fa-star"></i>
                                                         <span>(41 review)</span>
                                                     </p>
-                                                    <p><span>Store Name:</span> OAIO Store</p>
-                                                    <p><span>Address:</span> Steven Street, El Carjon, CA 92020, United
-                                                        States (US)</p>
-                                                    <p><span>Phone:</span> 1234567890</p>
-                                                    <p><span>mail:</span> example@gmail.com</p>
+                                                    <p><span>Store Name:</span> {{$product->vendor->shop_name}}</p>
+                                                    <p><span>Address:</span> {{$product->vendor->address}}</p>
+                                                    <p><span>Phone:</span> {{$product->vendor->phone}}</p>
+                                                    <p><span>mail:</span> {{$product->vendor->email}}</p>
                                                     <a href="vendor_details.html" class="see_btn">visit store</a>
                                                 </div>
                                             </div>
                                             <div class="col-xl-12">
                                                 <div class="wsus__vendor_details">
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                                                        eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                                                        Venenatis tellus in metus vulputate eu scelerisque felis. Vel
-                                                        pretium lectus quam id leo in vitae turpis massa. Nunc id cursus
-                                                        metus aliquam. Libero id faucibus nisl tincidunt eget. Aliquam
-                                                        id
-                                                        diam maecenas ultricies mi eget mauris. Volutpat ac tincidunt
-                                                        vitae
-                                                        semper quis lectus. Vestibulum mattis ullamcorper velit sed. A
-                                                        arcu
-                                                        cursus vitae congue mauris.
-                                                        <span>A arcu cursus vitae congue mauris. Sagittis id consectetur
-                                                            purus ut. Tellus rutrum tellus pellentesque eu tincidunt
-                                                            tortor
-                                                            aliquam nulla. Diam in arcu cursus euismod quis. Eget sit
-                                                            amet
-                                                            tellus cras adipiscing enim eu. In fermentum et sollicitudin
-                                                            ac
-                                                            orci phasellus. A condimentum vitae sapien pellentesque
-                                                            habitant
-                                                            morbi tristique senectus et. In dictum non consectetur a
-                                                            erat.
-                                                            Nunc scelerisque viverra mauris in aliquam sem fringilla.
-                                                        </span>
-                                                    </p>
+                                                    {!!$product->vendor->description!!}
                                                 </div>
                                             </div>
                                         </div>
