@@ -228,19 +228,17 @@
                         <div id="sticky_pro_zoom">
                             <div class="exzoom hidden" id="exzoom">
                                 <div class="exzoom_img_box">
-                                    <a class="venobox wsus__pro_det_video" data-autoplay="true" data-vbtype="video"
-                                       href="https://youtu.be/7m16dFI1AF8">
-                                        <i class="fas fa-play"></i>
-                                    </a>
+                                    @if ($product->video_link)
+                                        <a class="venobox wsus__pro_det_video" data-autoplay="true" data-vbtype="video"
+                                           href="{{$product->video_link}}">
+                                            <i class="fas fa-play"></i>
+                                        </a>
+                                    @endif
                                     <ul class='exzoom_img_ul'>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom1.jpg')}}" alt="product"></li>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom2.jpg')}}" alt="product"></li>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom3.jpg')}}" alt="product"></li>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom4.jpg')}}" alt="product"></li>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom1.jpg')}}" alt="product"></li>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom2.jpg')}}" alt="product"></li>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom1.jpg')}}" alt="product"></li>
-                                        <li><img class="zoom ing-fluid w-100" src="{{asset('frontend/images/zoom2.jpg')}}" alt="product"></li>
+                                        <li><img class="zoom ing-fluid w-100" src="{{asset($product->thumb_image)}}" alt="product"></li>
+                                        @foreach ($product->productImageGalleries as $productImage)
+                                            <li><img class="zoom ing-fluid w-100" src="{{asset($productImage->image)}}" alt="product"></li>
+                                        @endforeach
                                     </ul>
                                 </div>
                                 <div class="exzoom_nav"></div>
@@ -255,9 +253,17 @@
                     </div>
                     <div class="col-xl-5 col-md-7 col-lg-7">
                         <div class="wsus__pro_details_text">
-                            <a class="title" href="#">Electronics Black Wrist Watch</a>
-                            <p class="wsus__stock_area"><span class="in_stock">in stock</span> (167 item)</p>
-                            <h4>$50.00 <del>$60.00</del></h4>
+                            <a class="title" href="javascript:;">{{$product->name}}</a>
+                            @if ($product->qty > 0)
+                                <p class="wsus__stock_area"><span class="in_stock">in stock</span> ({{$product->qty}} item)</p>
+                            @elseif ($product->qty === 0)
+                                <p class="wsus__stock_area"><span class="in_stock">stock out</span> ({{$product->qty}} item)</p>
+                            @endif
+                            @if (checkDiscount($product))
+                                <h4>${{$product->offer_price}} <del>${{$product->price}}</del></h4>
+                            @else
+                                <h4>${{$product->price}}</h4>
+                            @endif
                             <p class="review">
                                 <i class="fas fa-star"></i>
                                 <i class="fas fa-star"></i>
@@ -266,64 +272,30 @@
                                 <i class="fas fa-star-half-alt"></i>
                                 <span>20 review</span>
                             </p>
-                            <!-- <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia
-                                neque
-                                sint obcaecati asperiores dolor cumque. ad voluptate dolores reprehenderit hic adipisci
-                                Similique eaque illum.</p> -->
+                            <p class="description">{!! $product->short_description !!}</p>
+                            <div class="row">
+                                <input type="hidden" name="product_id" value="{{$product->id}}">
+                                @foreach ($product->variants as $variant)
+                                    @if ($variant->status != 0)
+                                        <div class="col-xl-6 col-sm-6">
+                                            <h5 class="mb-2">{{$variant->name}}: </h5>
+                                            <select class="select_2" name="variants_items[]">
+                                                @foreach ($variant->productVariantItems as $variantItem)
+                                                    @if ($variantItem->status != 0)
+                                                        <option value="{{$variantItem->id}}" {{$variantItem->is_default == 1 ? 'selected' : ''}}>{{$variantItem->name}} (${{$variantItem->price}})</option>
+                                                    @endif
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    @endif
+                                @endforeach
 
-                            <div class="wsus_pro_hot_deals">
-                                <h5>offer ending time : </h5>
-                                <div class="simply-countdown simply-countdown-one"></div>
-                            </div>
-                            <div class="wsus_pro_det_color">
-                                <h5>color :</h5>
-                                <ul>
-                                    <li><a class="blue" href="#"><i class="far fa-check"></i></a></li>
-                                    <li><a class="orange" href="#"><i class="far fa-check"></i></a></li>
-                                    <li><a class="yellow" href="#"><i class="far fa-check"></i></a></li>
-                                    <li><a class="black" href="#"><i class="far fa-check"></i></a></li>
-                                    <li><a class="red" href="#"><i class="far fa-check"></i></a></li>
-                                </ul>
-                            </div>
-                            <div class="wsus_pro__det_size">
-                                <h5>size :</h5>
-                                <ul>
-                                    <li><a href="#">S</a></li>
-                                    <li><a href="#">M</a></li>
-                                    <li><a href="#">L</a></li>
-                                    <li><a href="#">XL</a></li>
-                                </ul>
                             </div>
                             <div class="wsus__quentity">
                                 <h5>quentity :</h5>
                                 <form class="select_number">
                                     <input class="number_area" type="text" min="1" max="100" value="1" />
                                 </form>
-                                <h3>$50.00</h3>
-                            </div>
-                            <div class="wsus__selectbox">
-                                <div class="row">
-                                    <div class="col-xl-6 col-sm-6">
-                                        <h5 class="mb-2">select:</h5>
-                                        <select class="select_2" name="state">
-                                            <option>default select</option>
-                                            <option>select 1</option>
-                                            <option>select 2</option>
-                                            <option>select 3</option>
-                                            <option>select 4</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-xl-6 col-sm-6">
-                                        <h5 class="mb-2">select:</h5>
-                                        <select class="select_2" name="state">
-                                            <option>default select</option>
-                                            <option>select 1</option>
-                                            <option>select 2</option>
-                                            <option>select 3</option>
-                                            <option>select 4</option>
-                                        </select>
-                                    </div>
-                                </div>
                             </div>
                             <ul class="wsus__button_area">
                                 <li><a class="add_cart" href="#">add to cart</a></li>
@@ -332,7 +304,7 @@
                                 <li><a href="#"><i class="far fa-random"></i></a></li>
                             </ul>
                             <p class="brand_model"><span>model :</span> 12345670</p>
-                            <p class="brand_model"><span>brand :</span> The Northland</p>
+                            <p class="brand_model"><span>brand :</span> {{$product->brand->name}}</p>
                             <div class="wsus__pro_det_share">
                                 <h5>share :</h5>
                                 <ul class="d-flex">
@@ -342,9 +314,6 @@
                                     <li><a class="instagram" href="#"><i class="fab fa-instagram"></i></a></li>
                                 </ul>
                             </div>
-                            <a class="wsus__pro_report" href="#" data-bs-toggle="modal"
-                               data-bs-target="#exampleModal"><i class="fal fa-comment-alt-smile"></i> Report incorrect
-                                product information.</a>
                         </div>
                     </div>
                     <div class="col-xl-3 col-md-12 mt-md-5 mt-lg-0">
