@@ -56,7 +56,6 @@
                         'admin.products-image-gallery.*',
                         'admin.products-variant.*',
                         'admin.products-variant-item.*',
-                        'admin.reviews.*',
                     ]) }}">
                         <a class="nav-link" href="{{ route('admin.products.index') }}">Products</a></li>
                     <li class="{{ setActive(['admin.seller-products.*']) }}"><a class="nav-link"
@@ -66,14 +65,20 @@
                 </ul>
             </li>
 
-            <li class="dropdown {{setActive(['admin.vendor-profile.*'])}}">
+            <li class="dropdown {{setActive([
+    'admin.vendor-profile.*',
+     'admin.flash-sale.*',
+     'admin.coupons.*',
+    ])}}">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Ecommerce</span></a>
                 <ul class="dropdown-menu">
-                    <li class="{{setActive(['admin.vendor-profile.*'])}}"><a class="nav-link" href="{{route('admin.flash-sale.index')}}">Flash Sale</a></li>
+                    <li class="{{setActive(['admin.flash-sale.*'])}}"><a class="nav-link" href="{{route('admin.flash-sale.index')}}">Flash Sale</a></li>
+                    <li class="{{ setActive(['admin.coupons.*']) }}"><a class="nav-link"
+                                                                        href="{{ route('admin.coupons.index') }}">Coupons</a></li>
                     <li class="{{setActive(['admin.vendor-profile.*'])}}"><a class="nav-link" href="{{route('admin.vendor-profile.index')}}">Vendor Profile</a></li>
                 </ul>
             </li>
-            <li><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
+            <li class="{{setActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
                     <span>Settings</span></a></li>
         </ul>
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
