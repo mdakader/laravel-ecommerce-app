@@ -10,6 +10,14 @@ use Cart;
 
 class CartController extends Controller
 {
+    /** Show cart page  */
+    public function cartDetails()
+    {
+        $cartItems = Cart::content();
+
+        return view('frontend.pages.cart-detail', compact('cartItems', ));
+    }
+
     /** Add item to cart */
     public function addToCart(Request $request)
     {
@@ -61,12 +69,6 @@ class CartController extends Controller
         return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
     }
 
-    /** Cart Details Page */
-    public function cartDetails(){
-        $cartItems = Cart::content();
-        return view('frontend.pages.cart-details', compact('cartItems'));
-    }
-
     /** Update product quantity */
     public function updateProductQty(Request $request)
     {
@@ -94,6 +96,17 @@ class CartController extends Controller
         return $total;
     }
 
+    /** get cart total amount */
+    public function cartTotal()
+    {
+        $total = 0;
+        foreach(Cart::content() as $product){
+            $total += $this->getProductTotal($product->rowId);
+        }
+
+        return $total;
+    }
+
     /** clear all cart products */
     public function clearCart()
     {
@@ -110,6 +123,11 @@ class CartController extends Controller
         return redirect()->back();
     }
 
+    /** Get cart count */
+    public function getCartCount()
+    {
+        return Cart::content()->count();
+    }
 
     /** Get all cart products */
     public function getCartProducts()
@@ -117,28 +135,11 @@ class CartController extends Controller
         return Cart::content();
     }
 
-    /** Remove product form sidebar cart */
+    /** Romve product form sidebar cart */
     public function removeSidebarProduct(Request $request)
     {
         Cart::remove($request->rowId);
 
         return response(['status' => 'success', 'message' => 'Product removed successfully!']);
-    }
-
-    /** Get cart count */
-    public function getCartCount()
-    {
-        return Cart::content()->count();
-    }
-
-    /** get cart total amount */
-    public function cartTotal()
-    {
-        $total = 0;
-        foreach(Cart::content() as $product){
-            $total += $this->getProductTotal($product->rowId);
-        }
-
-        return $total;
     }
 }
