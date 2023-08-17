@@ -63,6 +63,7 @@ class CartController extends Controller
 
     /** Cart Details Page */
     public function cartDetails(){
-        return view('frontend.pages.cart-details');
+        $cartItems = Cart::content();
+        return view('frontend.pages.cart-details', compact('cartItems'));
     }
 }
