@@ -75,9 +75,9 @@
 
                                         <td class="wsus__pro_name">
                                             <p>{!! $item->name !!}</p>
-{{--                                            @foreach ($item->options->variants as $key => $variant)--}}
-{{--                                                <span>{{$key}}: {{$variant['name']}} ({{$settings->currency_icon.$variant['price']}})</span>--}}
-{{--                                            @endforeach--}}
+                                            @foreach ($item->options->variants as $key => $variant)
+                                                <span>{{$key}}: {{$variant['name']}} ({{$settings->currency_icon.$variant['price']}})</span>
+                                            @endforeach
 
                                         </td>
 
