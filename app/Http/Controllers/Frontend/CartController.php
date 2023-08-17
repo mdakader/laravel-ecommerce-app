@@ -109,4 +109,12 @@ class CartController extends Controller
         toastr('Product removed succesfully!', 'success', 'Success');
         return redirect()->back();
     }
+
+
+    /** Get cart count */
+    public function getCartCount()
+    {
+        return Cart::content()->count();
+    }
+
 }
