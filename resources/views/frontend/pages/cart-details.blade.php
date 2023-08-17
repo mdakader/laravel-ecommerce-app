@@ -90,11 +90,11 @@
                                         </td>
 
                                         <td class="wsus__pro_select">
-
-                                                <form class="select_number">
-                                                    <input class="number_area" name="qty" type="text" min="1" max="100" value="1" />
-                                                </form>
-
+                                            <div class="product_qty_wrapper">
+                                                <button class="btn btn-danger product-decrement">-</button>
+                                                <input class="product-qty" data-rowid="{{$item->rowId}}" type="text" min="1" max="100" value="{{$item->qty}}" readonly />
+                                                <button class="btn btn-success product-increment">+</button>
+                                            </div>
                                         </td>
 
                                         <td class="wsus__pro_icon">
@@ -171,3 +171,42 @@
           CART VIEW PAGE END
     ==============================-->
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+
+            // increment product quantity
+            $('.product-increment').on('click', function(){
+                let input = $(this).siblings('.product-qty');
+                let quantity = parseInt(input.val()) + 1;
+                let rowId = input.data('rowid');
+                input.val(quantity);
+
+                $.ajax({
+                    url: "{{route('cart.update-quantity')}}",
+                    method: 'POST',
+                    data: {
+                        rowId: rowId,
+                        quantity: quantity
+                    },
+                    success: function(data){
+                        if(data.status === 'success'){
+                            toastr.success(data.message)
+                        }else if (data.status === 'error'){
+                            toastr.error(data.message)
+                        }
+                    },
+                    error: function(data){
+
+                    }
+                })
+            })
+        });
+    </script>
+@endpush
