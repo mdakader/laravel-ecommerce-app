@@ -117,4 +117,14 @@ class CartController extends Controller
         return Cart::content()->count();
     }
 
+    /** get cart total amount */
+    public function cartTotal()
+    {
+        $total = 0;
+        foreach(Cart::content() as $product){
+            $total += $this->getProductTotal($product->rowId);
+        }
+
+        return $total;
+    }
 }
