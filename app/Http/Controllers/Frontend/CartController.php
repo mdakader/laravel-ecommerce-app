@@ -10,47 +10,59 @@ use Cart;
 
 class CartController extends Controller
 {
-    /** Add to cart */
+    /** Add item to cart */
     public function addToCart(Request $request)
     {
 
         $product = Product::findOrFail($request->product_id);
-        $variants = [];
 
+        // check product quantity
+        if($product->qty === 0){
+            return response(['status' => 'error', 'message' => 'Product stock out']);
+        }elseif($product->qty < $request->qty){
+            return response(['status' => 'error', 'message' => 'Quantity not available in our stock']);
+        }
+
+        $variants = [];
         $variantTotalAmount = 0;
-        if ($request->has('variants_items')) {
-            foreach ($request->variants_items as $item_id) {
+
+        if($request->has('variants_items')){
+            foreach($request->variants_items as $item_id){
                 $variantItem = ProductVariantItem::find($item_id);
                 $variants[$variantItem->productVariant->name]['name'] = $variantItem->name;
-                $variants[$variantItem->productVariant->price]['price'] = $variantItem->price;
+                $variants[$variantItem->productVariant->name]['price'] = $variantItem->price;
                 $variantTotalAmount += $variantItem->price;
             }
         }
 
 
-        /**  Check discount  */
-
+        /** check discount */
         $productPrice = 0;
 
-        if (checkDiscount($product)) {
-            $productPrice = ($product->offer_price + $variantTotalAmount);
-        } else {
-            $productPrice = ($product->price + $variantTotalAmount);
+        if(checkDiscount($product)){
+            $productPrice = $product->offer_price;
+        }else {
+            $productPrice = $product->price;
         }
 
         $cartData = [];
         $cartData['id'] = $product->id;
         $cartData['name'] = $product->name;
-        $cartData['qty'] = $product->qty;
+        $cartData['qty'] = $request->qty;
         $cartData['price'] = $productPrice;
         $cartData['weight'] = 10;
         $cartData['options']['variants'] = $variants;
+        $cartData['options']['variants_total'] = $variantTotalAmount;
         $cartData['options']['image'] = $product->thumb_image;
         $cartData['options']['slug'] = $product->slug;
 
         Cart::add($cartData);
 
         return response(['status' => 'success', 'message' => 'Added to cart successfully!']);
+    }
 
+    /** Cart Details Page */
+    public function cartDetails(){
+        return view('frontend.pages.cart-details');
     }
 }
