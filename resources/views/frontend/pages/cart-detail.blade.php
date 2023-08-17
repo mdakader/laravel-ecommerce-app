@@ -174,14 +174,14 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
+        $(document).ready(function(){
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
 
-            // increment product quantity
+            // incriment product quantity
             $('.product-increment').on('click', function(){
                 let input = $(this).siblings('.product-qty');
                 let quantity = parseInt(input.val()) + 1;
@@ -201,6 +201,9 @@
                             let totalAmount = "{{$settings->currency_icon}}"+data.product_total
                             $(productId).text(totalAmount)
 
+                            renderCartSubTotal()
+                            calculateCouponDescount()
+
                             toastr.success(data.message)
                         }else if (data.status === 'error'){
                             toastr.error(data.message)
@@ -210,7 +213,7 @@
 
                     }
                 })
-            });
+            })
 
             // decrement product quantity
             $('.product-decrement').on('click', function(){
@@ -237,6 +240,8 @@
                             let totalAmount = "{{$settings->currency_icon}}"+data.product_total
                             $(productId).text(totalAmount)
 
+                            renderCartSubTotal()
+
                             toastr.success(data.message)
                         }else if (data.status === 'error'){
                             toastr.error(data.message)
@@ -247,7 +252,8 @@
                     }
                 })
 
-            });
+            })
+
             // clear cart
             $('.clear_cart').on('click', function(e){
                 e.preventDefault();
@@ -276,7 +282,21 @@
                         })
                     }
                 })
-            });
+            })
+
+            // get subtotal of cart and put it on dom
+            function renderCartSubTotal(){
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('cart.sidebar-product-total') }}",
+                    success: function(data) {
+                        $('#sub_total').text("{{$settings->currency_icon}}"+data);
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                })
+            }
 
         });
     </script>
