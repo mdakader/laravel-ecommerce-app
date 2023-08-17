@@ -8,6 +8,7 @@ use App\Http\Controllers\Frontend\UserDashboardController;
 use App\Http\Controllers\Frontend\FrontendProductController;
 use App\Http\Controllers\Frontend\UserProfileController;
 use App\Http\Controllers\Frontend\UserAddressController;
+use App\Http\Controllers\Frontend\CartController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,6 +39,8 @@ require __DIR__.'/auth.php';
 /** Admin Login Routes*/
 Route::get('admin/login', [AdminController::class, 'login'])->name('admin.login');
 
+/** Cart routes */
+Route::post('add-to-cart', [CartController::class, 'addToCart'])->name('add-to-cart');
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> 'user', 'as'=>'user.'], function()
 {
