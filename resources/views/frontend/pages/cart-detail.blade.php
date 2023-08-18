@@ -327,6 +327,7 @@
                         if(data.status === 'error'){
                             toastr.error(data.message)
                         }else if (data.status === 'success'){
+                            calculateCouponDescount()
                             toastr.success(data.message)
                         }
                     },
@@ -334,8 +335,25 @@
                         console.log(data);
                     }
                 })
-
             });
+
+
+            // calculate discount amount
+            function calculateCouponDescount(){
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('coupon-calculation') }}",
+                    success: function(data) {
+                        if(data.status === 'success'){
+                            $('#discount').text('{{$settings->currency_icon}}'+data.discount);
+                            $('#cart_total').text('{{$settings->currency_icon}}'+data.cart_total);
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                })
+            }
 
         });
     </script>
