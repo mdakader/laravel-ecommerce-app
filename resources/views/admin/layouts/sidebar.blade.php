@@ -28,12 +28,6 @@
                     <li class="{{setActive(['admin.child-category.*'])}}"><a class="nav-link" href="{{route('admin.child-category.index')}}">Child Categories</a></li>
                 </ul>
             </li>
-            <li class="dropdown {{setActive(['admin.slider.*'])}}">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i> <span>Manage Banner</span></a>
-                <ul class="dropdown-menu">
-                    <li class="{{setActive(['admin.slider.*'])}}"><a class="nav-link" href="{{route('admin.slider.index')}}">Slider</a></li>
-                </ul>
-            </li>
 
             <li
                 class="dropdown {{ setActive([
@@ -125,6 +119,32 @@
                                                                                  href="{{ route('admin.payment-settings.index') }}">Payment Settings</a></li>
                 </ul>
             </li>
+
+            <li
+                class="dropdown {{ setActive([
+                    'admin.slider.*',
+                    'admin.vendor-condition.index',
+                    'admin.about.index',
+                    'admin.terms-and-conditions.index',
+                ]) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-cog"></i> <span>Manage Website</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setActive(['admin.slider.*']) }}"><a class="nav-link"
+                                                                       href="{{ route('admin.slider.index') }}">Slider</a></li>
+
+                    <li class="{{ setActive(['admin.slider.*']) }}"><a class="nav-link"
+                                                                       href="{{ route('admin.home-page-setting') }}">Home Page Setting</a></li>
+
+                    <li class="{{ setActive(['admin.vendor-condition.index']) }}"><a class="nav-link"
+                                                                                     href="">Vendor Condition</a></li>
+                    <li class="{{ setActive(['admin.about.index']) }}"><a class="nav-link"
+                                                                          href="">About page</a></li>
+                    <li class="{{ setActive(['admin.terms-and-conditions.index']) }}"><a class="nav-link"
+                                                                                         href="">Terms Page</a></li>
+
+                </ul>
+            </li>
+
             <li class="{{setActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
                     <span>Settings</span></a></li>
         </ul>
