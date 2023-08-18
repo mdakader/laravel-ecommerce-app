@@ -23,6 +23,7 @@ use App\Http\Controllers\Backend\StripeSettingController;
 use App\Http\Controllers\Backend\CodSettingController;
 use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\TransactionController;
 
 
 /** Admin Routes */
@@ -131,3 +132,6 @@ Route::get('out-for-delivery-orders', [OrderController::class, 'outForDeliveryOr
 Route::get('delivered-orders', [OrderController::class, 'deliveredOrders'])->name('delivered-orders');
 Route::get('canceled-orders', [OrderController::class, 'canceledOrders'])->name('canceled-orders');
 Route::resource('order', OrderController::class);
+
+/** Order Transaction route */
+Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
