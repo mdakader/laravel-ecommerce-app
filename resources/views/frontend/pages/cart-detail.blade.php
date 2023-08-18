@@ -117,19 +117,35 @@
                         </div>
                     </div>
                 </div>
+{{--                <div class="col-xl-3">--}}
+{{--                    <div class="wsus__cart_list_footer_button" id="sticky_sidebar">--}}
+{{--                        <h6>total cart</h6>--}}
+{{--                        <p>subtotal: <span id="sub_total">{{$settings->currency_icon}}{{getCartTotal()}}</span></p>--}}
+{{--                        <p>delivery: <span>$00.00</span></p>--}}
+{{--                        <p>discount: <span>$10.00</span></p>--}}
+{{--                        <p class="total"><span>total:</span> <span id="cart_total">{{$settings->currency_icon}}{{getMainCartTotal()}}</span></p>--}}
+
+{{--                        <form>--}}
+{{--                            <input type="text" placeholder="Coupon Code">--}}
+{{--                            <button type="submit" class="common_btn">apply</button>--}}
+{{--                        </form>--}}
+{{--                        <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>--}}
+{{--                        <a class="common_btn mt-1 w-100 text-center" href="{{route('home')}}"><i--}}
+{{--                                class="fab fa-shopify"></i> Keep Shopping</a>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
                 <div class="col-xl-3">
                     <div class="wsus__cart_list_footer_button" id="sticky_sidebar">
                         <h6>total cart</h6>
                         <p>subtotal: <span id="sub_total">{{$settings->currency_icon}}{{getCartTotal()}}</span></p>
-                        <p>delivery: <span>$00.00</span></p>
-                        <p>discount: <span>$10.00</span></p>
+                        <p>coupon(-): <span id="discount">{{$settings->currency_icon}}{{getCartDiscount()}}</span></p>
                         <p class="total"><span>total:</span> <span id="cart_total">{{$settings->currency_icon}}{{getMainCartTotal()}}</span></p>
 
-                        <form>
-                            <input type="text" placeholder="Coupon Code">
+                        <form id="coupon_form">
+                            <input type="text" placeholder="Coupon Code" name="coupon_code" value="{{session()->has('coupon') ? session()->get('coupon')['coupon_code'] : ''}}">
                             <button type="submit" class="common_btn">apply</button>
                         </form>
-                        <a class="common_btn mt-4 w-100 text-center" href="check_out.html">checkout</a>
+                        <a class="common_btn mt-4 w-100 text-center" href="">checkout</a>
                         <a class="common_btn mt-1 w-100 text-center" href="{{route('home')}}"><i
                                 class="fab fa-shopify"></i> Keep Shopping</a>
                     </div>
@@ -282,7 +298,7 @@
                         })
                     }
                 })
-            })
+            });
 
             // get subtotal of cart and put it on dom
             function renderCartSubTotal(){
@@ -297,6 +313,29 @@
                     }
                 })
             }
+
+            // applay coupon on cart
+
+            $('#coupon_form').on('submit', function(e){
+                e.preventDefault();
+                let formData = $(this).serialize();
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('apply-coupon') }}",
+                    data: formData,
+                    success: function(data) {
+                        if(data.status === 'error'){
+                            toastr.error(data.message)
+                        }else if (data.status === 'success'){
+                            toastr.success(data.message)
+                        }
+                    },
+                    error: function(data) {
+                        console.log(data);
+                    }
+                })
+
+            });
 
         });
     </script>
