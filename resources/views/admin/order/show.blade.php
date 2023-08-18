@@ -167,6 +167,7 @@
     <script>
         $(document).ready(function(){
 
+            // Order status change
             $('#order_status').on('change', function(){
                 let status = $(this).val();
                 let id = $(this).data('id');
@@ -186,6 +187,7 @@
                 })
             })
 
+            // Payment status change
             $('#payment_status').on('change', function(){
                 let status = $(this).val();
                 let id = $(this).data('id');
@@ -205,6 +207,7 @@
                 })
             })
 
+            // Print Invoice status
             $('.print_invoice').on('click', function(){
                 let printBody = $('.invoice-print');
                 let originalContents = $('body').html();
