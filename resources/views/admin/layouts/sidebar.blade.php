@@ -82,23 +82,23 @@
                     <li class="{{ setActive(['admin.order.*']) }}"><a class="nav-link"
                                                                       href="{{ route('admin.order.index') }}">All Orders</a></li>
                     <li class="{{ setActive(['admin.pending-orders']) }}"><a class="nav-link"
-                                                                             href="">All Pending Orders</a></li>
+                                                                             href="{{ route('admin.pending-orders') }}">All Pending Orders</a></li>
                     <li class="{{ setActive(['admin.processed-orders']) }}"><a class="nav-link"
-                                                                               href="">All processed Orders</a></li>
+                                                                               href="{{ route('admin.processed-orders') }}">All processed Orders</a></li>
                     <li class="{{ setActive(['admin.dropped-off']) }}"><a class="nav-link"
-                                                                          href="">All Dropped Off Orders</a></li>
+                                                                          href="{{ route('admin.dropped-off-orders') }}">All Dropped Off Orders</a></li>
 
                     <li class="{{ setActive(['admin.shipped-orders']) }}"><a class="nav-link"
-                                                                             href="">All Shipped Orders</a></li>
+                                                                             href="{{ route('admin.shipped-orders') }}">All Shipped Orders</a></li>
                     <li class="{{ setActive(['admin.out-for-delivery-orders']) }}"><a class="nav-link"
-                                                                                      href="">All Out For Delivery Orders</a></li>
+                                                                                      href="{{ route('admin.out-for-delivery-orders') }}">All Out For Delivery Orders</a></li>
 
 
                     <li class="{{ setActive(['admin.delivered-orders']) }}"><a class="nav-link"
-                                                                               href="">All Delivered Orders</a></li>
+                                                                               href="{{ route('admin.delivered-orders') }}">All Delivered Orders</a></li>
 
                     <li class="{{ setActive(['admin.canceled-orders']) }}"><a class="nav-link"
-                                                                              href="">All Canceled Orders</a></li>
+                                                                              href="{{ route('admin.canceled-orders') }}">All Canceled Orders</a></li>
 
                 </ul>
             </li>
