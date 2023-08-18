@@ -19,6 +19,8 @@ use App\Http\Controllers\Backend\FlashSaleController;
 use App\Http\Controllers\Backend\SettingController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingRuleController;
+use App\Http\Controllers\Backend\StripeSettingController;
+use App\Http\Controllers\Backend\PaymentSettingController;
 
 
 /** Admin Routes */
@@ -107,3 +109,9 @@ Route::resource('coupons', CouponController::class);
 /** Coupon Routes */
 Route::put('shipping-rule/change-status', [ShippingRuleController::class, 'changeStatus'])->name('shipping-rule.change-status');
 Route::resource('shipping-rule', ShippingRuleController::class);
+
+
+/** Payment settings routes */
+Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
+Route::put('stripe-setting/{id}', [StripeSettingController::class, 'update'])->name('stripe-setting.update');
+Route::put('cod-setting/{id}', [CodSettingController::class, 'update'])->name('cod-setting.update');

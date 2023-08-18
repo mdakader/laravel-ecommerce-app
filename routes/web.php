@@ -74,4 +74,10 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> 'user', 'as'=>'us
     /** Payment Routes */
     Route::get('payment', [PaymentController::class, 'index'])->name('payment');
     Route::get('payment-success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
+
+    /** Stripe routes */
+    Route::post('stripe/payment', [PaymentController::class, 'payWithStripe'])->name('stripe.payment');
+
+    /** COD routes */
+    Route::get('cod/payment', [PaymentController::class, 'payWithCod'])->name('cod.payment');
 });
