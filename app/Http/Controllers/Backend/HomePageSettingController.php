@@ -12,6 +12,47 @@ class HomePageSettingController extends Controller
     public function index()
     {
         $categories = Category::where('status', 1)->get();
-        return view('admin.home-page-setting.index', compact('categories', ));
+        return view('admin.home-page-setting.index', compact('categories'));
+    }
+
+
+    public function updatePopularCategorySection(Request $request)
+    {
+
+        $data = [
+            [
+                'category' => $request->cat_one,
+                'sub_category' => $request->sub_cat_one,
+                'child_category' => $request->child_cat_one,
+            ],
+            [
+                'category' => $request->cat_two,
+                'sub_category' => $request->sub_cat_two,
+                'child_category' => $request->child_cat_two,
+            ],
+            [
+                'category' => $request->cat_three,
+                'sub_category' => $request->sub_cat_three,
+                'child_category' => $request->child_cat_three,
+            ],
+            [
+                'category' => $request->cat_four,
+                'sub_category' => $request->sub_cat_four,
+                'child_category' => $request->child_cat_four,
+            ]
+        ];
+//        dd($request->all());
+        HomePageSetting::updateOrCreate(
+            [
+                'key' => 'popular_category_section'
+            ],
+            [
+                'value' => json_encode($data)
+            ]
+        );
+
+        toastr('Updated successfully!', 'success', 'success');
+
+        return redirect()->back();
     }
 }
