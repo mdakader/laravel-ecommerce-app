@@ -81,30 +81,30 @@
                                         <th class="text-center">Quantity</th>
                                         <th class="text-right">Totals</th>
                                     </tr>
-{{--                                    @foreach ($order->orderProducts as $product)--}}
-{{--                                        @php--}}
-{{--                                            $variants = json_decode($product->variants);--}}
-{{--                                        @endphp--}}
-{{--                                        <tr>--}}
-{{--                                            <td>{{++$loop->index}}</td>--}}
-{{--                                            @if (isset($product->product->slug))--}}
-{{--                                                <td><a target="_blank" href="{{route('product-detail', $product->product->slug)}}">{{$product->product_name}}</a></td>--}}
-{{--                                            @else--}}
-{{--                                                <td>{{$product->product_name}}</td>--}}
-{{--                                            @endif--}}
-{{--                                            <td>--}}
-{{--                                                @foreach ($variants as $key => $variant)--}}
-{{--                                                    <b>{{$key}}:</b> {{$variant->name}} ( {{$settings->currency_icon}}{{$variant->price}} )--}}
+                                    @foreach ($order->orderProducts as $product)
+                                        @php
+                                            $variants = json_decode($product->variants);
+                                        @endphp
+                                        <tr>
+                                            <td>{{++$loop->index}}</td>
+                                            @if (isset($product->product->slug))
+                                                <td><a target="_blank" href="{{route('product-detail', $product->product->slug)}}">{{$product->product_name}}</a></td>
+                                            @else
+                                                <td>{{$product->product_name}}</td>
+                                            @endif
+                                            <td>
+                                                @foreach ($variants as $key => $variant)
+                                                    <b>{{$key}}:</b> {{$variant->name}} ( {{$settings->currency_icon}}{{$variant->price}} )
 
-{{--                                                @endforeach--}}
-{{--                                            </td>--}}
-{{--                                            <td>{{$product->vendor->shop_name}}</td>--}}
+                                                @endforeach
+                                            </td>
+                                            <td>{{$product->vendor->shop_name}}</td>
 
-{{--                                            <td class="text-center">{{$settings->currency_icon}}{{$product->unit_price}} </td>--}}
-{{--                                            <td class="text-center">{{$product->qty}}</td>--}}
-{{--                                            <td class="text-right">{{$settings->currency_icon}}{{($product->unit_price * $product->qty) + $product->variant_total}}</td>--}}
-{{--                                        </tr>--}}
-{{--                                    @endforeach--}}
+                                            <td class="text-center">{{$settings->currency_icon}}{{$product->unit_price}} </td>
+                                            <td class="text-center">{{$product->qty}}</td>
+                                            <td class="text-right">{{$settings->currency_icon}}{{($product->unit_price * $product->qty) + $product->variant_total}}</td>
+                                        </tr>
+                                    @endforeach
 
                                 </table>
                             </div>
@@ -123,9 +123,9 @@
                                         <div class="form-group">
                                             <label for="">Order Status</label>
                                             <select name="order_status" id="order_status" data-id="{{$order->id}}" class="form-control">
-{{--                                                @foreach (config('order_status.order_status_admin') as $key => $orderStatus)--}}
-{{--                                                    <option {{$order->order_status === $key ? 'selected' : ''}} value="{{$key}}">{{$orderStatus['status']}}</option>--}}
-{{--                                                @endforeach--}}
+                                                @foreach (config('order_status.order_status_admin') as $key => $orderStatus)
+                                                    <option {{$order->order_status === $key ? 'selected' : ''}} value="{{$key}}">{{$orderStatus['status']}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
