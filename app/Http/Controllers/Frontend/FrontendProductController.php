@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\ChildCategory;
 use App\Models\Product;
+use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -12,16 +14,56 @@ class FrontendProductController extends Controller
 {
     /** Show Product Shop Page */
     public function productsIndex(Request $request){
-        if($request->has('category')) {
+        if($request->has('category')){
             $category = Category::where('slug', $request->category)->firstOrFail();
             $products = Product::where([
                 'category_id' => $category->id,
                 'status' => 1,
                 'is_approved' => 1
-            ])->paginate(2);
+            ])
+                ->when($request->has('range'), function($query) use ($request){
+                    $price = explode(';', $request->range);
+                    $from = $price[0];
+                    $to = $price[1];
+
+                    return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                })
+                ->paginate(12);
+        }elseif($request->has('subcategory')){
+            $category = SubCategory::where('slug', $request->subcategory)->firstOrFail();
+            $products = Product::where([
+                'sub_category_id' => $category->id,
+                'status' => 1,
+                'is_approved' => 1
+            ])
+                ->when($request->has('range'), function($query) use ($request){
+                    $price = explode(';', $request->range);
+                    $from = $price[0];
+                    $to = $price[1];
+
+                    return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                })
+                ->paginate(12);
+        }elseif($request->has('childcategory')){
+            $category = ChildCategory::where('slug', $request->childcategory)->firstOrFail();
+
+            $products = Product::where([
+                'child_category_id' => $category->id,
+                'status' => 1,
+                'is_approved' => 1
+            ])
+                ->when($request->has('range'), function($query) use ($request){
+                    $price = explode(';', $request->range);
+                    $from = $price[0];
+                    $to = $price[1];
+
+                    return $query->where('price', '>=', $from)->where('price', '<=', $to);
+                })
+                ->paginate(12);
+        }else {
+            $products = Product::where(['status' => 1, 'is_approved' => 1])->orderBy('id', 'DESC')->paginate(12);
         }
         $categories = Category::where(['status' => 1])->get();
-        $products = Product::where(['status' => 1, 'is_approved' => 1])->orderBy('id', 'DESC')->paginate(12);
         return view('frontend.pages.product', compact('categories','products' ));
     }
     /** Show product details page */
