@@ -86,8 +86,15 @@
                                      aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
                                     <div class="accordion-body">
                                         <div class="price_ranger">
-                                            <input type="hidden" id="slider_range" class="flat-slider" />
-                                            <button type="submit" class="common_btn">filter</button>
+                                            <form action="{{url()->current()}}">
+                                                @foreach (request()->query() as $key => $value)
+                                                    @if($key != 'range')
+                                                        <input type="hidden" name="{{$key}}" value="{{$value}}" />
+                                                    @endif
+                                                @endforeach
+                                                <input type="hidden" id="slider_range" name="range" class="flat-slider" />
+                                                <button type="submit" class="common_btn">filter</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -543,7 +550,7 @@
 
                     }
                 })
-            })
+            });
         })
     </script>
 @endpush
