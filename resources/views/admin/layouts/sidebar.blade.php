@@ -144,7 +144,9 @@
 
                 </ul>
             </li>
-
+            <li><a class="nav-link {{ setActive(['admin.advertisement.*']) }}"
+                   href="{{ route('admin.advertisement.index') }}"><i class="fas fa-ad"></i>
+                    <span>Advertisement</span></a></li>
             <li class="{{setActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
                     <span>Settings</span></a>
             </li>
