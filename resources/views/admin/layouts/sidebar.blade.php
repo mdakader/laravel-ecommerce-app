@@ -148,7 +148,9 @@
             <li class="{{setActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
                     <span>Settings</span></a>
             </li>
-
+            <li><a class="nav-link {{ setActive(['admin.subscribers.*']) }}"
+                   href="{{ route('admin.subscribers.index') }}"><i class="fas fa-user"></i>
+                    <span>Subscribers</span></a></li>
             <li
                 class="dropdown {{ setActive([
                     'admin.footer-info.index',
