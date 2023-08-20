@@ -25,6 +25,8 @@ use App\Http\Controllers\Backend\PaymentSettingController;
 use App\Http\Controllers\Backend\OrderController;
 use App\Http\Controllers\Backend\TransactionController;
 use App\Http\Controllers\Backend\HomePageSettingController;
+use App\Http\Controllers\Backend\FooterInfoController;
+use App\Http\Controllers\Backend\FooterSocialController;
 
 
 /** Admin Routes */
@@ -145,3 +147,10 @@ Route::resource('order', OrderController::class);
 
 /** Order Transaction route */
 Route::get('transaction', [TransactionController::class, 'index'])->name('transaction');
+
+
+/** footer routes */
+Route::resource('footer-info', FooterInfoController::class);
+Route::put('footer-socials/change-status', [FooterSocialController::class, 'changeStatus'])->name('footer-socials.change-status');
+Route::resource('footer-socials', FooterSocialController::class);
+

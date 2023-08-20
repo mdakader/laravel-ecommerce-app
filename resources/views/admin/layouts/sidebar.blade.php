@@ -146,7 +146,32 @@
             </li>
 
             <li class="{{setActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
-                    <span>Settings</span></a></li>
+                    <span>Settings</span></a>
+            </li>
+
+            <li
+                class="dropdown {{ setActive([
+                    'admin.footer-info.index',
+                    'admin.footer-socials.*',
+                    'admin.footer-grid-two.*',
+                    'admin.footer-grid-three.*',
+                ]) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-th-large"></i><span>Footer</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setActive(['admin.footer-info.index']) }}"><a class="nav-link"
+                                                                                href="{{ route('admin.footer-info.index') }}">Footer Info</a></li>
+
+                    <li class="{{ setActive(['admin.footer-socials.*']) }}"><a class="nav-link"
+                                                                               href="{{ route('admin.footer-socials.index') }}">Footer Socials</a></li>
+
+                    <li class="{{ setActive(['admin.footer-grid-two.*']) }}"><a class="nav-link"
+                                                                                href="">Footer Grid Two</a></li>
+
+                    <li class="{{ setActive(['admin.footer-grid-three.*']) }}"><a class="nav-link"
+                                                                                  href="">Footer Grid Three</a></li>
+
+                </ul>
+            </li>
         </ul>
         <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
             <a href="https://getstisla.com/docs" class="btn btn-primary btn-lg btn-block btn-icon-split">
