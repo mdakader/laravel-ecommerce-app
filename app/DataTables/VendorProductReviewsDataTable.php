@@ -3,7 +3,7 @@
 namespace App\DataTables;
 
 use App\Models\ProductReview;
-use App\Models\UserProductReview;
+use App\Models\VendorProductReview;
 use Illuminate\Database\Eloquent\Builder as QueryBuilder;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\EloquentDataTable;
@@ -14,7 +14,7 @@ use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 
-class UserProductReviewsDataTable extends DataTable
+class VendorProductReviewsDataTable extends DataTable
 {
     /**
      * Build the DataTable class.
@@ -34,7 +34,7 @@ class UserProductReviewsDataTable extends DataTable
                 if($query->status == 1){
                     return "<span class='badge bg-success'>Approved</span>";
                 }else {
-                    return "<span class='badge bg-warning'>Pending</span>";
+                    return "<span class='badge bg-waring'>Pending</span>";
                 }
             })
             ->rawColumns(['product', 'status'])
@@ -46,7 +46,7 @@ class UserProductReviewsDataTable extends DataTable
      */
     public function query(ProductReview $model): QueryBuilder
     {
-        return $model::with('product')->where('user_id', Auth::user()->id)->newQuery();
+        return $model->where('vendor_id', Auth::user()->vendor->id)->newQuery();
     }
 
     /**
@@ -55,7 +55,7 @@ class UserProductReviewsDataTable extends DataTable
     public function html(): HtmlBuilder
     {
         return $this->builder()
-            ->setTableId('userproductreviews-table')
+            ->setTableId('vendorproductreviews-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
             //->dom('Bfrtip')
@@ -77,15 +77,12 @@ class UserProductReviewsDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-
             Column::make('id'),
             Column::make('product'),
             Column::make('user'),
             Column::make('rating'),
             Column::make('review'),
             Column::make('status')
-
-
         ];
     }
 
@@ -94,6 +91,6 @@ class UserProductReviewsDataTable extends DataTable
      */
     protected function filename(): string
     {
-        return 'UserProductReviews_' . date('YmdHis');
+        return 'VendorProductReviews_' . date('YmdHis');
     }
 }
