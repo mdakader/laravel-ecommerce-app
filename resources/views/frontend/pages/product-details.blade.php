@@ -626,42 +626,44 @@
                                                 <div class="col-xl-4 col-lg-5 mt-4 mt-lg-0">
                                                     <div class="wsus__post_comment rev_mar" id="sticky_sidebar3">
                                                         <h4>write a Review</h4>
-                                                        <form action="#">
+                                                        <form action="{{route('user.review.create')}}" enctype="multipart/form-data" method="POST">
+                                                            @csrf
                                                             <p class="rating">
                                                                 <span>select your rating : </span>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
-                                                                <i class="fas fa-star"></i>
                                                             </p>
+
                                                             <div class="row">
-                                                                <div class="col-xl-12">
+
+                                                                <div class="col-xl-12 mb-4">
                                                                     <div class="wsus__single_com">
-                                                                        <input type="text" placeholder="Name">
+                                                                        <select name="rating" id="" class="form-control">
+                                                                            <option value="">Select</option>
+                                                                            <option value="1">1</option>
+                                                                            <option value="2">2</option>
+                                                                            <option value="3">3</option>
+                                                                            <option value="4">4</option>
+                                                                            <option value="5">5</option>
+                                                                        </select>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col-xl-12">
-                                                                    <div class="wsus__single_com">
-                                                                        <input type="email" placeholder="Email">
-                                                                    </div>
-                                                                </div>
+
                                                                 <div class="col-xl-12">
                                                                     <div class="col-xl-12">
                                                                         <div class="wsus__single_com">
-                                                                            <textarea cols="3" rows="3"
+                                                                            <textarea cols="3" rows="3" name="review"
                                                                                       placeholder="Write your review"></textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                             <div class="img_upload">
-                                                                <div class="gallery">
-                                                                    <a class="cam" href="javascript:void(0)"><span><i
-                                                                                class="fas fa-image"></i></span>
-                                                                    </a>
+                                                                <div class="">
+                                                                    <input type="file" name="images[]" multiple>
                                                                 </div>
                                                             </div>
+                                                            <input type="hidden" name="product_id" id="" value="{{$product->id}}">
+                                                            <input type="hidden" name="vendor_id" id="" value="{{$product->vendor_id}}">
+
                                                             <button class="common_btn" type="submit">submit
                                                                 review</button>
                                                         </form>

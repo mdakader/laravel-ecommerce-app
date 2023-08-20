@@ -14,6 +14,7 @@ use App\Http\Controllers\Frontend\WishlistController;
 use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\NewsletterController;
+use App\Http\Controllers\Frontend\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -98,4 +99,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> 'user', 'as'=>'us
 
     /** COD routes */
     Route::get('cod/payment', [PaymentController::class, 'payWithCod'])->name('cod.payment');
+
+
+    /** product review routes */
+    Route::post('review', [ReviewController::class, 'create'])->name('review.create');
 });
