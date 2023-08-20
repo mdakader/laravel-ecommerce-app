@@ -7,6 +7,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\ChildCategory;
 use App\Models\Product;
+use App\Models\ProductReview;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -97,10 +98,12 @@ class FrontendProductController extends Controller
         $brands = Brand::where(['status' => 1])->get();
         return view('frontend.pages.product', compact('categories','products', 'brands' ));
     }
-    /** Show product details page */
-    public function showProduct(string $slug){
+    /** Show product detail page */
+    public function showProduct(string $slug)
+    {
         $product = Product::with(['vendor', 'category', 'productImageGalleries', 'variants', 'brand'])->where('slug', $slug)->where('status', 1)->first();
-        return view('frontend.pages.product-details', compact('product'));
+        $reviews = ProductReview::where('product_id', $product->id)->where('status', 1)->paginate(10);
+        return view('frontend.pages.product-detail', compact('product', 'reviews'));
     }
 
     public function chageListView(Request $request)

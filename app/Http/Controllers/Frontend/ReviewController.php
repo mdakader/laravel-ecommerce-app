@@ -2,64 +2,64 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\DataTables\UserProductReviewsDataTable;
 use App\Http\Controllers\Controller;
+use App\Models\ProductReview;
+use App\Models\ProductReviewGallery;
+use App\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ReviewController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    use ImageUploadTrait;
+
+    public function index(UserProductReviewsDataTable $dataTable)
     {
-        //
+        return $dataTable->render('frontend.dashboard.review.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function create(Request $request)
     {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $request->validate([
+            'rating' => ['required'],
+            'review' => ['required', 'max:200'],
+            'images.*' => ['image']
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $checkReviewExist = ProductReview::where(['product_id' => $request->product_id, 'user_id' => Auth::user()->id])->first();
+        if($checkReviewExist){
+            toastr('You already added a review for this product!', 'error', 'error');
+            return redirect()->back();
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
+        $imagePaths = $this->uploadMultiImage($request, 'images', 'uploads');
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        $productReview = new ProductReview();
+        $productReview->product_id = $request->product_id;
+        $productReview->vendor_id = $request->vendor_id;
+        $productReview->user_id = Auth::user()->id;
+        $productReview->rating = $request->rating;
+        $productReview->review = $request->review;
+        $productReview->status = 0;
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $productReview->save();
+
+        if(!empty($imagePaths)){
+
+            foreach($imagePaths as $path){
+                $reviewGallery = new ProductReviewGallery();
+                $reviewGallery->product_review_id = $productReview->id;
+                $reviewGallery->image = $path;
+                $reviewGallery->save();
+            }
+        }
+
+        toastr('Review added successfully!', 'success', 'success');
+
+        return redirect()->back();
+
     }
 }
+

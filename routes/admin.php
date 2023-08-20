@@ -31,6 +31,7 @@ use App\Http\Controllers\Backend\FooterGridTwoController;
 use App\Http\Controllers\Backend\FooterGridThreeController;
 use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\AdvertisementController;
+use App\Http\Controllers\Backend\AdminReviewController;
 
 /** Admin Routes */
 
@@ -180,3 +181,7 @@ Route::put('advertisement/homepage-banner-secion-three', [AdvertisementControlle
 Route::put('advertisement/homepage-banner-secion-four', [AdvertisementController::class, 'homepageBannerSecionFour'])->name('homepage-banner-secion-four');
 Route::put('advertisement/productpage-banner', [AdvertisementController::class, 'productPageBanner'])->name('productpage-banner');
 Route::put('advertisement/cartpage-banner', [AdvertisementController::class, 'cartPageBanner'])->name('cartpage-banner');
+
+/** reviews routes */
+Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
+Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus'])->name('reviews.change-status');
