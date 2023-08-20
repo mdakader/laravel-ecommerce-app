@@ -168,6 +168,40 @@
             </div>
         </div>
     </section>
+    <section id="wsus__single_banner">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-6 col-lg-6">
+                    <div class="wsus__single_banner_content">
+                        @if ($cartpage_banner_section->banner_one->status == 1)
+                            <a href="{{$cartpage_banner_section->banner_one->banner_url}}">
+                                <img class="img-gluid" src="{{asset($cartpage_banner_section->banner_one->banner_image)}}" alt="">
+                                <div class="wsus__single_banner_text">
+                                    <h6>sell on <span>35% off</span></h6>
+                                    <h3>smart watch</h3>
+                                    <a class="shop_btn" href="#">shop now</a>
+                                </div>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6">
+                    <div class="wsus__single_banner_content single_banner_2">
+                        @if ($cartpage_banner_section->banner_two->status == 1)
+                            <a href="{{$cartpage_banner_section->banner_two->banner_url}}">
+                                <img class="img-gluid" src="{{asset($cartpage_banner_section->banner_two->banner_image)}}" alt="">
+                                <div class="wsus__single_banner_text">
+                                    <h6>New Collection</h6>
+                                    <h3>Cosmetics</h3>
+                                    <a class="shop_btn" href="{{$cartpage_banner_section->banner_one->banner_url}}">shop now</a>
+                                </div>
+                            </a>
+                        @endif
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <!--============================
           CART VIEW PAGE END
     ==============================-->
