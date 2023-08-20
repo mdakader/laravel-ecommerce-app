@@ -72,7 +72,7 @@
             <div class="row">
                 <div class="col-xl-12">
                     <div class="wsus__copyright d-flex justify-content-center">
-                        <p>Copyright © 2021 Sazao shop. All Rights Reserved.</p>
+                        <p>{{@$footerInfo->copyright}}</p>
                     </div>
                 </div>
             </div>
