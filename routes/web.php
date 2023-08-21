@@ -74,6 +74,9 @@ Route::get('vendor-product/{id}', [HomeController::class, 'vendorProductsPage'])
 /** about page route */
 Route::get('about', [PageController::class, 'about'])->name('about');
 
+/** terms and conditions page route */
+Route::get('terms-and-conditions', [PageController::class, 'termsAndCondition'])->name('terms-and-conditions');
+
 Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> 'user', 'as'=>'user.'], function()
 {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');

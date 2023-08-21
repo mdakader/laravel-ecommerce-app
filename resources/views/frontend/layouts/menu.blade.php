@@ -121,6 +121,7 @@
                                 <li><a href="faqs.html">faq</a></li>
                                 <li><a href="invoice.html">invoice</a></li>
                                 <li><a href="{{route('about')}}">about</a></li>
+                                <li><a href="{{route('terms-and-conditions')}}">Terms and Conditions</a></li>
                                 <li><a href="product_grid_view.html">product</a></li>
                                 <li><a href="check_out.html">check out</a></li>
                                 <li><a href="team.html">team</a></li>
