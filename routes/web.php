@@ -15,6 +15,7 @@ use App\Http\Controllers\Frontend\CheckOutController;
 use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\ReviewController;
+use App\Http\Controllers\Frontend\UserVendorReqeustController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -107,4 +108,8 @@ Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> 'user', 'as'=>'us
     /** product review routes */
     Route::post('review', [ReviewController::class, 'create'])->name('review.create');
     Route::get('reviews', [ReviewController::class, 'index'])->name('review.index');
+
+    /** Vendor request route */
+    Route::get('vendor-request', [UserVendorReqeustController::class, 'index'])->name('vendor-request.index');
+    Route::post('vendor-request', [UserVendorReqeustController::class, 'create'])->name('vendor-request.create');
 });
