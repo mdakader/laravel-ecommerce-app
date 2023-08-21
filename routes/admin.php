@@ -189,4 +189,5 @@ Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus
 
 /** Vendor request routes */
 Route::get('vendor-requests', [VendorRequestController::class, 'index'])->name('vendor-requests.index');
-Route::get('vendor-requests/{id}', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
+Route::get('vendor-requests/{id}/show', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
+Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class, 'changeStatus'])->name('vendor-requests.change-status');

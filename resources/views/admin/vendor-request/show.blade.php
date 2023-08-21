@@ -54,7 +54,7 @@
                             <div class="row mt-4">
                                 <div class="col-lg-8">
                                     <div class="col-md-4">
-                                        <form action="" method="POST">
+                                        <form action="{{route('admin.vendor-requests.change-status', $vendor->id)}}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="form-group">
@@ -80,3 +80,60 @@
     </section>
 
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function(){
+
+            $('#order_status').on('change', function(){
+                let status = $(this).val();
+                let id = $(this).data('id');
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{route('admin.order.status')}}",
+                    data: {status: status, id:id},
+                    success: function(data){
+                        if(data.status === 'success'){
+                            toastr.success(data.message)
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
+                })
+            })
+
+            $('#payment_status').on('change', function(){
+                let status = $(this).val();
+                let id = $(this).data('id');
+
+                $.ajax({
+                    method: 'GET',
+                    url: "{{route('admin.payment.status')}}",
+                    data: {status: status, id:id},
+                    success: function(data){
+                        if(data.status === 'success'){
+                            toastr.success(data.message)
+                        }
+                    },
+                    error: function(data){
+                        console.log(data);
+                    }
+                })
+            })
+
+            $('.print_invoice').on('click', function(){
+                let printBody = $('.invoice-print');
+                let originalContents = $('body').html();
+
+                $('body').html(printBody.html());
+
+                window.print();
+
+                $('body').html(originalContents);
+
+            })
+        })
+    </script>
+@endpush
