@@ -16,6 +16,7 @@ use App\Http\Controllers\Frontend\PaymentController;
 use App\Http\Controllers\Frontend\NewsletterController;
 use App\Http\Controllers\Frontend\ReviewController;
 use App\Http\Controllers\Frontend\UserVendorReqeustController;
+use App\Http\Controllers\Frontend\PageController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,6 +70,9 @@ Route::get('newsletter-verify/{token}', [NewsletterController::class, 'newsLette
 /** vendor page routes */
 Route::get('vendor', [HomeController::class, 'vendorPage'])->name('vendor.index');
 Route::get('vendor-product/{id}', [HomeController::class, 'vendorProductsPage'])->name('vendor.products');
+
+/** about page route */
+Route::get('about', [PageController::class, 'about'])->name('about');
 
 Route::group(['middleware' => ['auth', 'verified'], 'prefix'=> 'user', 'as'=>'user.'], function()
 {
