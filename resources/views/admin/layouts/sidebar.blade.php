@@ -139,7 +139,7 @@
                                                                        href="{{ route('admin.home-page-setting') }}">Home Page Setting</a></li>
 
                     <li class="{{ setActive(['admin.vendor-condition.index']) }}"><a class="nav-link"
-                                                                                     href="">Vendor Condition</a></li>
+                                                                                     href="{{ route('admin.vendor-condition.index') }}">Vendor Condition</a></li>
                     <li class="{{ setActive(['admin.about.index']) }}"><a class="nav-link"
                                                                           href="">About page</a></li>
                     <li class="{{ setActive(['admin.terms-and-conditions.index']) }}"><a class="nav-link"

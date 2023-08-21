@@ -35,6 +35,7 @@ use App\Http\Controllers\Backend\AdminReviewController;
 use App\Http\Controllers\Backend\VendorRequestController;
 use App\Http\Controllers\Backend\CustomerListController;
 use App\Http\Controllers\Backend\VendorListController;
+use App\Http\Controllers\Backend\VendorConditionController;
 
 /** Admin Routes */
 
@@ -194,9 +195,13 @@ Route::get('vendor-requests', [VendorRequestController::class, 'index'])->name('
 Route::get('vendor-requests/{id}/show', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
 Route::put('vendor-requests/{id}/change-status', [VendorRequestController::class, 'changeStatus'])->name('vendor-requests.change-status');
 
-/** coustomer list routes */
+/** customer list routes */
 Route::get('customer', [CustomerListController::class, 'index'])->name('customer.index');
 Route::put('customer/status-change', [CustomerListController::class, 'changeStatus'])->name('customer.status-change');
 
+/** Vendor list routes */
 Route::get('vendor-list', [VendorListController::class, 'index'])->name('vendor-list.index');
 Route::put('vendor-list/status-change', [VendorListController::class, 'changeStatus'])->name('vendor-list.status-change');
+
+Route::get('vendor-condition', [VendorConditionController::class, 'index'])->name('vendor-condition.index');
+Route::put('vendor-condition/update', [VendorConditionController::class, 'update'])->name('vendor-condition.update');
