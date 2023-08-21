@@ -153,6 +153,16 @@
             <li class="{{setActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
                     <span>Settings</span></a>
             </li>
+            <li
+                class="dropdown {{ setActive([
+                    'admin.vendor-requests.index',
+                ]) }}">
+                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-users"></i> <span>Users</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ setActive(['admin.vendor-requests.index']) }}"><a class="nav-link"
+                                                                                    href="{{ route('admin.vendor-requests.index') }}">Pending vendors</a></li>
+                </ul>
+            </li>
             <li><a class="nav-link {{ setActive(['admin.subscribers.*']) }}"
                    href="{{ route('admin.subscribers.index') }}"><i class="fas fa-user"></i>
                     <span>Subscribers</span></a></li>

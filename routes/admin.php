@@ -32,6 +32,7 @@ use App\Http\Controllers\Backend\FooterGridThreeController;
 use App\Http\Controllers\Backend\SubscribersController;
 use App\Http\Controllers\Backend\AdvertisementController;
 use App\Http\Controllers\Backend\AdminReviewController;
+use App\Http\Controllers\Backend\VendorRequestController;
 
 /** Admin Routes */
 
@@ -185,3 +186,7 @@ Route::put('advertisement/cartpage-banner', [AdvertisementController::class, 'ca
 /** reviews routes */
 Route::get('reviews', [AdminReviewController::class, 'index'])->name('reviews.index');
 Route::put('reviews/change-status', [AdminReviewController::class, 'changeStatus'])->name('reviews.change-status');
+
+/** Vendor request routes */
+Route::get('vendor-requests', [VendorRequestController::class, 'index'])->name('vendor-requests.index');
+Route::get('vendor-requests/{id}', [VendorRequestController::class, 'show'])->name('vendor-requests.show');
