@@ -13,7 +13,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-12">
-                        <h4>blog details</h4>
+                        <h4>blog dtails</h4>
                         <ul>
                             <li><a href="#">blog</a></li>
                             <li><a href="#">blog details</a></li>
@@ -85,53 +85,53 @@
                                 </div>
                             </div>
                         @endif
-                        <div class="wsus__blog_post">
-                            <h4>Popular Post</h4>
-                            <div class="wsus__blog_post_single">
-                                <a href="#" class="wsus__blog_post_img">
-                                    <img src="images/location_1.jpg" alt="blog" class="imgofluid w-100">
-                                </a>
-                                <div class="wsus__blog_post_text">
-                                    <a href="#">One Thing Separates Creators</a>
-                                    <p> <span>Jul 29 2021 </span> 2 Comment </p>
+                        <div class="wsus__comment_area">
+                            <h4>comment <span>{{count($comments)}}</span></h4>
+                            @foreach ($comments as $comment)
+
+                                <div class="wsus__main_comment">
+                                    <div class="wsus__comment_img">
+                                        <img style="width: 80px;height: 80px;object-fit: contain;" src="{{asset($comment->user->image)}}" alt="user" class="img-fluid w-100">
+                                    </div>
+                                    <div class="wsus__comment_text replay">
+                                        <h6>{{$comment->user->name}} <span>{{date('d M Y', strtotime($comment->created_at))}}</span></h6>
+                                        <p>{{$comment->comment}}</p>
+
+                                    </div>
+                                </div>
+                            @endforeach
+                            @if (count($comments) === 0)
+                                <i>Be a first one to comment! </i>
+                            @endif
+
+                            <div id="pagination">
+                                <div class="mt-5">
+                                    @if ($comments->hasPages())
+                                        {{$comments->withQueryString()->links()}}
+                                    @endif
                                 </div>
                             </div>
-                            <div class="wsus__blog_post_single">
-                                <a href="#" class="wsus__blog_post_img">
-                                    <img src="images/location_2.jpg" alt="blog" class="imgofluid w-100">
-                                </a>
-                                <div class="wsus__blog_post_text">
-                                    <a href="#">One Thing Separates Creators</a>
-                                    <p> <span>Jul 29 2021 </span> 2 Comment </p>
-                                </div>
-                            </div>
-                            <div class="wsus__blog_post_single">
-                                <a href="#" class="wsus__blog_post_img">
-                                    <img src="images/location_3.jpg" alt="blog" class="imgofluid w-100">
-                                </a>
-                                <div class="wsus__blog_post_text">
-                                    <a href="#">One Thing Separates Creators</a>
-                                    <p> <span>Jul 29 2021 </span> 2 Comment </p>
-                                </div>
-                            </div>
-                            <div class="wsus__blog_post_single">
-                                <a href="#" class="wsus__blog_post_img">
-                                    <img src="images/location_4.jpg" alt="blog" class="imgofluid w-100">
-                                </a>
-                                <div class="wsus__blog_post_text">
-                                    <a href="#">One Thing Separates Creators</a>
-                                    <p> <span>Jul 29 2021 </span> 2 Comment </p>
-                                </div>
-                            </div>
-                            <div class="wsus__blog_post_single">
-                                <a href="#" class="wsus__blog_post_img">
-                                    <img src="images/location_2.jpg" alt="blog" class="imgofluid w-100">
-                                </a>
-                                <div class="wsus__blog_post_text">
-                                    <a href="#">One Thing Separates Creators</a>
-                                    <p> <span>Jul 29 2021 </span> 2 Comment </p>
-                                </div>
-                            </div>
+                        </div>
+                        <div class="wsus__post_comment">
+                            <h4>post a comment</h4>
+                            @if (auth()->check())
+                                <form action="{{route('user.blog-comment')}}" method="POST">
+                                    @csrf
+                                    <div class="row">
+
+                                        <div class="col-xl-12">
+                                            <div class="wsus__single_com">
+                                                <textarea rows="5" placeholder="Your Comment" name="comment"></textarea>
+                                                <input type="hidden" name="blog_id" value="{{$blog->id}}">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="common_btn" type="submit">post comment</button>
+                                </form>
+                            @else
+                                <p>Please login to comment on post!</p>
+                                <a class="common_btn" href="{{route('login')}}" >Login</a>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -163,11 +163,14 @@
                                     </a>
                                     <div class="wsus__blog_post_text">
                                         <a href="{{route('blog-details', $blog->slug)}}">{{limitText($blog->title, 35)}}</a>
-                                        <p> <span>{{date('M d Y', strtotime($blog->created_at))}} </span> 12 Comment </p>
+                                        <p> <span>{{date('M d Y', strtotime($blog->created_at))}} </span> {{count($blog->comments)}} Comment </p>
                                     </div>
                                 </div>
                             @endforeach
+
+
                         </div>
+
                     </div>
                 </div>
             </div>
