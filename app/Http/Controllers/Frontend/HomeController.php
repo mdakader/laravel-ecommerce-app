@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\FlashSale;
@@ -25,6 +26,7 @@ class HomeController extends Controller
         $categoryProductSliderSectionOne = HomePageSetting::where('key', 'product_slider_section_one')->first();
         $categoryProductSliderSectionTwo = HomePageSetting::where('key', 'product_slider_section_two')->first();
         $categoryProductSliderSectionThree = HomePageSetting::where('key', 'product_slider_section_three')->first();
+        $recentBlogs = Blog::with(['category', 'user'])->where('status',1)->orderBy('id', 'DESC')->take(8)->get();
         return view('frontend.home.home', compact(
             'sliders',
             'flashSaleDate',
@@ -34,7 +36,8 @@ class HomeController extends Controller
             'typeBaseProducts',
             'categoryProductSliderSectionOne',
             'categoryProductSliderSectionTwo',
-            'categoryProductSliderSectionThree'
+            'categoryProductSliderSectionThree',
+            'recentBlogs'
         ));
     }
 
