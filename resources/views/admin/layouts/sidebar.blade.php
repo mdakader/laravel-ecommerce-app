@@ -160,7 +160,7 @@
                     <li class="{{ setActive(['admin.blog-category.*']) }}"><a class="nav-link"
                                                                               href="{{ route('admin.blog-category.index') }}">Categories</a></li>
                     <li class="{{ setActive(['admin.blog.*']) }}"><a class="nav-link"
-                                                                     href="">Blogs</a></li>
+                                                                     href="{{ route('admin.blog.index') }}">Blogs</a></li>
                     <li class="{{ setActive(['admin.blog-comments.index']) }}"><a class="nav-link"
                                                                                   href="">Blog Comments</a></li>
                 </ul>

@@ -41,6 +41,7 @@ use App\Http\Controllers\Backend\TermsAndConditionController;
 use App\Http\Controllers\Backend\ManageUserController;
 use App\Http\Controllers\Backend\AdminListController;
 use App\Http\Controllers\Backend\BlogCategoryController;
+use App\Http\Controllers\Backend\BlogController;
 
 /** Admin Routes */
 
@@ -232,3 +233,6 @@ Route::delete('admin-list/{id}', [AdminListController::class, 'destory'])->name(
 /** Blog routes */
 Route::put('blog-category/status-change', [BlogCategoryController::class, 'changeStatus'])->name('blog-category.status-change');
 Route::resource('blog-category', BlogCategoryController::class);
+
+Route::put('blog/status-change', [BlogController::class, 'changeStatus'])->name('blog.status-change');
+Route::resource('blog', BlogController::class);
