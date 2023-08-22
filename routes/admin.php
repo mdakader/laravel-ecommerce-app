@@ -42,6 +42,7 @@ use App\Http\Controllers\Backend\ManageUserController;
 use App\Http\Controllers\Backend\AdminListController;
 use App\Http\Controllers\Backend\BlogCategoryController;
 use App\Http\Controllers\Backend\BlogController;
+use App\Http\Controllers\Backend\BlogCommentController;
 
 /** Admin Routes */
 
@@ -236,3 +237,5 @@ Route::resource('blog-category', BlogCategoryController::class);
 
 Route::put('blog/status-change', [BlogController::class, 'changeStatus'])->name('blog.status-change');
 Route::resource('blog', BlogController::class);
+Route::get('blog-comments', [BlogCommentController::class, 'index'])->name('blog-comments.index');
+Route::delete('blog-comments/{id}/destory', [BlogCommentController::class, 'destory'])->name('blog-comments.destory');

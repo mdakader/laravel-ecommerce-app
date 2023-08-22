@@ -162,7 +162,7 @@
                     <li class="{{ setActive(['admin.blog.*']) }}"><a class="nav-link"
                                                                      href="{{ route('admin.blog.index') }}">Blogs</a></li>
                     <li class="{{ setActive(['admin.blog-comments.index']) }}"><a class="nav-link"
-                                                                                  href="">Blog Comments</a></li>
+                                                                                  href="{{ route('admin.blog-comments.index') }}">Blog Comments</a></li>
                 </ul>
             </li>
             <li class="{{setActive(['admin.settings.*'])}}"><a class="nav-link" href="{{ route('admin.settings.index') }}"><i class="fas fa-wrench"></i>
